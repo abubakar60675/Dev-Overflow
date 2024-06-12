@@ -92,12 +92,7 @@ const Home = () => {
           />
         )}
       </div>
-      <div className="mt-10">
-        <Pagination
-        // pageNumber={searchParams?.page ? +searchParams.page : 1}
-        // isNext={result.isNext}
-        />
-      </div>
+      <div className="mt-10"></div>
     </>
   );
 };
