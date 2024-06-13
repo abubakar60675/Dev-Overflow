@@ -33,7 +33,7 @@ const QuestionCard = ({
   views,
   answers,
   createdAt,
-}: any) => {
+}: QuestionProps) => {
   return (
     <>
       <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
@@ -53,7 +53,7 @@ const QuestionCard = ({
         </div>
 
         <div className="mt-3.5 flex flex-wrap gap-2">
-          {tags.map((tag: any) => (
+          {tags.map((tag) => (
             <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
           ))}
         </div>
