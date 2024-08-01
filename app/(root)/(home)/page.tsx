@@ -12,6 +12,7 @@ import { getQuestions } from "@/lib/actions/question.action";
 
 const Home = async () => {
   const result = await getQuestions({});
+  console.log("result", result);
 
   return (
     <>
