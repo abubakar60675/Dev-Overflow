@@ -8,38 +8,12 @@ import Pagination from "@/components/shared/Pagination";
 import { HomePageFilters } from "@/constants/filters";
 import Link from "next/link";
 import React from "react";
+import { getQuestions } from "@/lib/actions/question.action";
 
-const questions = [
-  {
-    _id: "1",
-    title: "How to use React?",
-    tags: [
-      { _id: "1", name: "react" },
-      { _id: "2", name: "javascript" },
-    ],
-    author: "John Doe",
-    upvotes: 10,
-    views: 150,
-    answers: 5,
-    createdAt: new Date("2023-01-01"),
-  },
-  {
-    _id: "2",
-    title: "What is Node.js?",
-    tags: [
-      { _id: "1", name: "nodejs" },
-      { _id: "2", name: "javascript" },
-    ],
+const Home = async () => {
+  const result = await getQuestions({});
+  console.log("result", result);
 
-    author: "Jane Smith",
-    upvotes: 20,
-    views: 250,
-    answers: 8,
-    createdAt: new Date("2023-02-01"),
-  },
-];
-
-const Home = () => {
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -69,8 +43,8 @@ const Home = () => {
       <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}

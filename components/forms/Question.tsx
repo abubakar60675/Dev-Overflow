@@ -21,6 +21,8 @@ import { useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeProvider";
 import { createQuestion } from "@/lib/actions/question.action";
+import { ITag } from "@/database/tag.model";
+
 interface Props {
   type?: string;
   mongoUserId: string;
@@ -51,32 +53,33 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
-    createQuestion({});
-    // try {
-    //   if (type === "Edit") {
-    //     await editQuestion({
-    //       questionId: parsedQuestionDetails._id,
-    //       title: values.title,
-    //       content: values.explanation,
-    //       path: pathname,
-    //     });
 
-    //     router.push(`/question/${parsedQuestionDetails._id}`);
-    //   } else {
-    //     await createQuestion({
-    //       title: values.title,
-    //       content: values.explanation,
-    //       tags: values.tags,
-    //       author: JSON.parse(mongoUserId),
-    //       path: pathname,
-    //     });
+    try {
+      if (type === "Edit") {
+        // await editQuestion({
+        //   questionId: parsedQuestionDetails._id,
+        //   title: values.title,
+        //   content: values.explanation,
+        //   path: pathname,
+        // });
 
-    //     router.push("/");
-    //   }
-    // } catch (error) {
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+        router.push(`/question/${parsedQuestionDetails._id}`);
+      } else {
+        console.log("here is me");
+        await createQuestion({
+          title: values.title,
+          content: values.explanation,
+          tags: values.tags,
+          author: JSON.parse(mongoUserId),
+          path: pathname,
+        });
+
+        router.push("/");
+      }
+    } catch (error) {
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   const handleInputKeyDown = (
@@ -97,7 +100,11 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
           });
         }
 
-        if (!field.value.includes(tagValue as never)) {
+        if (
+          !field.value.some(
+            (tag: string) => tag.toLowerCase() === tagValue.toLowerCase()
+          )
+        ) {
           form.setValue("tags", [...field.value, tagValue]);
           tagInput.value = "";
           form.clearErrors("tags");
