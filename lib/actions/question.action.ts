@@ -9,7 +9,7 @@ import User from "@/database/user.model";
 import { revalidatePath } from "next/cache";
 import { FilterQuery } from "mongoose";
 
-export async function getQuestions(params: GetQuestionsParams) {
+export async function getQuestions(params: any) {
   try {
     await connectToDatabase();
 
