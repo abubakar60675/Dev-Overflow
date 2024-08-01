@@ -10,6 +10,7 @@ import { revalidatePath } from "next/cache";
 import { FilterQuery } from "mongoose";
 
 export async function getQuestions(params: any) {
+  console.log("getQuestions");
   try {
     await connectToDatabase();
 
