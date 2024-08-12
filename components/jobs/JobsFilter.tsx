@@ -68,13 +68,13 @@ const JobsFilter = ({ countriesList }: JobsFilterProps) => {
                   className="bg-light-900 px-4 py-3 dark:bg-dark-300 dark:text-light-700"
                 >
                   <div className="flex gap-3">
-                    <Image
+                    {/* <Image
                       src={country?.flags?.png || ""}
                       alt="country symbol"
                       width={25}
                       height={25}
                       className="rounded-full"
-                    />
+                    /> */}
                     <p>{`${country.name.common}`}</p>
                   </div>
                 </SelectItem>
