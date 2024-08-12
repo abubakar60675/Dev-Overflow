@@ -69,7 +69,7 @@ const JobsFilter = ({ countriesList }: JobsFilterProps) => {
                 >
                   <div className="flex gap-3">
                     <Image
-                      src={country.flags?.png}
+                      src={country?.flags?.png || ""}
                       alt="country symbol"
                       width={25}
                       height={25}
